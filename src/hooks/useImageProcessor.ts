@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 interface ProcessImageResult {
   id: string;
@@ -25,10 +25,58 @@ export function useImageProcessor() {
     if (!workerRef.current) {
       // 添加时间戳参数破坏缓存，确保每次都加载最新的 Worker 文件
       const timestamp = Date.now();
+      console.log('[DEBUG] Creating Worker with timestamp:', timestamp);
       workerRef.current = new Worker(`/workers/imageProcessor.js?v=${timestamp}`);
+      
+      // 添加 Worker 错误监听
+      workerRef.current.addEventListener('error', (error) => {
+        console.error('[DEBUG] Worker error event:', error);
+      });
+      
+      // 添加 Worker 消息监听（用于调试）
+      workerRef.current.addEventListener('message', (e) => {
+        if (e.data.debug) {
+          console.log('[DEBUG] Worker message:', e.data);
+        }
+      });
+      
+      console.log('[DEBUG] Worker created successfully');
     }
     return workerRef.current;
   }, []);
+
+  // 在 hook 初始化时就创建 Worker
+  React.useEffect(() => {
+    console.log('[DEBUG] useImageProcessor hook initialized, creating Worker...');
+    initWorker();
+    
+    return () => {
+      if (workerRef.current) {
+        console.log('[DEBUG] Cleaning up Worker');
+        workerRef.current.terminate();
+        workerRef.current = undefined;
+      }
+    };
+  }, [initWorker]);
+
+  // 添加 Worker 测试函数
+  const testWorker = useCallback(() => {
+    console.log('[DEBUG] Testing Worker...');
+    const worker = initWorker();
+    
+    // 发送测试消息
+    worker.postMessage({
+      test: true,
+      imageData: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+      quality: 80,
+      format: 'jpeg',
+      id: 'test-' + Date.now(),
+      originalSize: 100,
+      isMemeMode: false
+    });
+    
+    console.log('[DEBUG] Test message sent to Worker');
+  }, [initWorker]);
 
   // AVIF服务端处理函数
   const processAVIFOnServer = useCallback(async (imageData: string, quality: number): Promise<ProcessImageResult> => {
@@ -203,5 +251,5 @@ export function useImageProcessor() {
     }
   }, []);
 
-  return { processImage, processImages, processAVIFOnServer, cleanup };
+  return { processImage, processImages, processAVIFOnServer, cleanup, testWorker };
 }

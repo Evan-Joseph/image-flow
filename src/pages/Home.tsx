@@ -45,7 +45,13 @@ const Home: React.FC = () => {
     onRetry?: () => void;
     onDismiss?: () => void;
   }>>([]);
-  const { processImages, processImage } = useImageProcessor();
+  const { processImages, processImage, testWorker } = useImageProcessor();
+
+  // Worker 测试函数
+  const handleTestWorker = useCallback(() => {
+    console.log('[DEBUG] User triggered Worker test');
+    testWorker();
+  }, [testWorker]);
 
   const handleFilesAdded = useCallback((files: File[]) => {
     const newErrors: typeof errors = [];
@@ -321,12 +327,24 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 md:space-x-4">
-              <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 
+                className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white cursor-pointer"
+                onDoubleClick={handleTestWorker}
+                title="双击测试 Worker"
+              >
                 ImageFlow
               </h1>
               <p className="text-gray-600 dark:text-gray-400 hidden lg:block text-sm md:text-base">
                 {t('app.subtitle')}
               </p>
+              {/* 隐藏的测试按钮 */}
+              <button
+                onClick={handleTestWorker}
+                className="hidden"
+                id="worker-test-button"
+              >
+                Test Worker
+              </button>
             </div>
             <div className="flex items-center space-x-1 md:space-x-2">
               <LanguageToggle />
