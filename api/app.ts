@@ -3,8 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import authRoutes from './routes/auth';
-import convertAvifRoutes from './routes/convert-avif';
+import authRoutes from './routes/auth.js';
+import convertAvifRoutes from './routes/convert-avif.js';
 
 // 加载环境变量
 dotenv.config();
