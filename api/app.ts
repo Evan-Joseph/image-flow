@@ -72,7 +72,8 @@ app.get('/test/worker', (req, res) => {
     }
   } catch (error) {
     console.error(`[TEST WORKER] Error reading file:`, error);
-    res.status(500).json({ error: 'Failed to read worker file', details: error.message });
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    res.status(500).json({ error: 'Failed to read worker file', details: errorMessage });
   }
 });
 
