@@ -115,17 +115,17 @@ if (process.env.NODE_ENV === 'production') {
       });
     }
     
-    // 排除静态资源文件
+    // 只有HTML页面路由才返回index.html（不是静态资源）
     const staticExtensions = ['.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot'];
     const hasStaticExtension = staticExtensions.some(ext => req.path.endsWith(ext));
     
-    if (hasStaticExtension) {
-      // 如果是静态文件但没有找到，返回404
-      return res.status(404).send('File not found');
+    if (!hasStaticExtension) {
+      // 只有非静态文件的路由才返回 index.html
+      res.sendFile(path.join(staticPath, 'index.html'));
+    } else {
+      // 静态文件如果到这里说明没找到，返回404
+      res.status(404).send('File not found');
     }
-    
-    // 只有HTML页面路由才返回index.html
-    res.sendFile(path.join(staticPath, 'index.html'));
   });
 } else {
   // 开发环境的404处理
