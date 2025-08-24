@@ -44,10 +44,76 @@ export function useImageProcessor() {
           }
         });
         
-        // 监听 Worker 错误
+        // Worker 错误处理 - 增强版
         workerRef.current.addEventListener('error', (error) => {
           console.error('[DEBUG] Worker error event:', error);
+          console.error('[DEBUG] Worker error details:', {
+            message: error.message,
+            filename: error.filename,
+            lineno: error.lineno,
+            colno: error.colno,
+            error: error.error
+          });
+          
+          // 尝试获取更多错误信息
+          if (error.error) {
+            console.error('[DEBUG] Worker error object:', error.error);
+            console.error('[DEBUG] Worker error stack:', error.error.stack);
+          }
         });
+        
+        // 添加 Worker 状态检查
+        workerRef.current.addEventListener('error', (event) => {
+          console.error('[DEBUG] Worker addEventListener error:', event);
+          console.error('[DEBUG] Worker state after error:', {
+            workerExists: !!workerRef.current,
+            workerUrl: workerUrl
+          });
+        });
+        
+        // 添加 Worker 终止检查
+        workerRef.current.addEventListener('messageerror', (event) => {
+          console.error('[DEBUG] Worker message error:', event);
+        });
+        
+        // 验证 Worker 文件是否可访问
+        const workerUrl = `/workers/imageProcessor.js?t=${timestamp}`;
+        console.log('[DEBUG] Verifying Worker file accessibility:', workerUrl);
+        
+        fetch(workerUrl)
+          .then(response => {
+            console.log('[DEBUG] Worker file fetch response:', {
+              status: response.status,
+              statusText: response.statusText,
+              contentType: response.headers.get('content-type'),
+              url: response.url
+            });
+            
+            if (!response.ok) {
+              console.error('[DEBUG] Worker file not accessible:', response.status, response.statusText);
+              return;
+            }
+            
+            return response.text();
+          })
+          .then(content => {
+            if (content) {
+              console.log('[DEBUG] Worker file content length:', content.length);
+              console.log('[DEBUG] Worker file first 200 chars:', content.substring(0, 200));
+              
+              // 检查是否包含版本信息
+              const versionMatch = content.match(/v\d+\.\d+\.\d+/);
+              if (versionMatch) {
+                console.log('[DEBUG] Worker file version found:', versionMatch[0]);
+              } else {
+                console.warn('[DEBUG] Worker file version not found - may be old version');
+              }
+            }
+          })
+          .catch(error => {
+            console.error('[DEBUG] Failed to fetch Worker file:', error);
+          });
+        
         
       } catch (error) {
         console.error('[DEBUG] Failed to create Worker:', error);
