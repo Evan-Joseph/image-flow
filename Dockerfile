@@ -29,4 +29,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # 启动应用
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/api/server.js"]
