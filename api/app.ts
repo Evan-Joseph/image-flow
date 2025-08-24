@@ -42,15 +42,6 @@ app.post('/api/analytics/web-vitals', (req, res) => {
   res.json({ success: true, message: 'Web vitals data received' });
 });
 
-// 静态文件服务（生产环境）
-if (process.env.NODE_ENV === 'production') {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  const staticPath = path.join(__dirname, '../../dist');
-  
-  app.use(express.static(staticPath));
-}
-
 // 健康检查
 app.get('/api/health', (req, res) => {
   res.json({ 
@@ -63,22 +54,43 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// SPA 路由处理 - 所有非API路由都返回index.html（仅生产环境）
+// 静态文件服务（生产环境）
 if (process.env.NODE_ENV === 'production') {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const staticPath = path.join(__dirname, '../../dist');
   
+  // 静态文件服务，设置正确的MIME类型
+  app.use(express.static(staticPath, {
+    setHeaders: (res, path) => {
+      if (path.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript');
+      }
+    }
+  }));
+  
+  // SPA 路由处理 - 只有HTML页面路由才返回index.html
   app.get('*', (req, res) => {
-    if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(staticPath, 'index.html'));
-    } else {
-      res.status(404).json({
+    // 排除API路由
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({
         error: 'API端点不存在',
         path: req.originalUrl,
         method: req.method
       });
     }
+    
+    // 排除静态资源文件
+    const staticExtensions = ['.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot'];
+    const hasStaticExtension = staticExtensions.some(ext => req.path.endsWith(ext));
+    
+    if (hasStaticExtension) {
+      // 如果是静态文件但没有找到，返回404
+      return res.status(404).send('File not found');
+    }
+    
+    // 只有HTML页面路由才返回index.html
+    res.sendFile(path.join(staticPath, 'index.html'));
   });
 } else {
   // 开发环境的404处理
