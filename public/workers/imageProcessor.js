@@ -1,4 +1,24 @@
 // 图片处理Worker - 增强版
+// 添加全局错误处理
+self.addEventListener('error', function(event) {
+  console.error('[Worker] Global error:', event.error || event.message || 'Unknown error');
+  self.postMessage({
+    success: false,
+    error: `Worker全局错误: ${event.error?.message || event.message || '未知错误'}`
+  });
+});
+
+self.addEventListener('unhandledrejection', function(event) {
+  console.error('[Worker] Unhandled promise rejection:', event.reason);
+  self.postMessage({
+    success: false,
+    error: `Worker Promise错误: ${event.reason?.message || event.reason || '未知Promise错误'}`
+  });
+});
+
+// Worker 初始化成功确认
+console.log('[Worker] ImageProcessor Worker initialized successfully');
+
 self.onmessage = async function(e) {
   const { imageData, quality, format, id, originalSize, isMemeMode } = e.data;
   
@@ -146,10 +166,15 @@ self.onmessage = async function(e) {
     reader.readAsDataURL(resultBlob);
     
   } catch (error) {
+    console.error('[Worker] Processing error:', error);
+    const errorMessage = error instanceof Error 
+      ? error.message 
+      : (typeof error === 'string' ? error : '图片处理失败');
+    
     self.postMessage({
       id,
       success: false,
-      error: error.message || '图片处理失败'
+      error: errorMessage || '图片处理失败'
     });
   }
 };
