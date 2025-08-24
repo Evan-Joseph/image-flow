@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 if (process.env.NODE_ENV === 'production') {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const staticPath = path.join(__dirname, '../dist');
+  const staticPath = path.join(__dirname, '../../dist');
   
   app.use(express.static(staticPath));
   
