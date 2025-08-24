@@ -26,21 +26,33 @@ export function useImageProcessor() {
       // 添加时间戳参数破坏缓存，确保每次都加载最新的 Worker 文件
       const timestamp = Date.now();
       console.log('[DEBUG] Creating Worker with timestamp:', timestamp);
-      workerRef.current = new Worker(`/workers/imageProcessor.js?v=${timestamp}`);
       
-      // 添加 Worker 错误监听
-      workerRef.current.addEventListener('error', (error) => {
-        console.error('[DEBUG] Worker error event:', error);
-      });
-      
-      // 添加 Worker 消息监听（用于调试）
-      workerRef.current.addEventListener('message', (e) => {
-        if (e.data.debug) {
-          console.log('[DEBUG] Worker message:', e.data);
-        }
-      });
-      
-      console.log('[DEBUG] Worker created successfully');
+      try {
+        workerRef.current = new Worker(`/workers/imageProcessor.js?v=${timestamp}`);
+        console.log('[DEBUG] Worker created successfully');
+        
+        // 监听 Worker 消息
+        workerRef.current.addEventListener('message', (e) => {
+          if (e.data.type === 'init') {
+            if (e.data.success) {
+              console.log('[DEBUG] Worker initialization successful:', e.data.message);
+            } else {
+              console.error('[DEBUG] Worker initialization failed:', e.data.error);
+            }
+          } else if (e.data.type === 'test') {
+            console.log('[DEBUG] Worker test response received:', e.data);
+          }
+        });
+        
+        // 监听 Worker 错误
+        workerRef.current.addEventListener('error', (error) => {
+          console.error('[DEBUG] Worker error event:', error);
+        });
+        
+      } catch (error) {
+        console.error('[DEBUG] Failed to create Worker:', error);
+        throw error;
+      }
     }
     return workerRef.current;
   }, []);
@@ -48,7 +60,12 @@ export function useImageProcessor() {
   // 在 hook 初始化时就创建 Worker
   React.useEffect(() => {
     console.log('[DEBUG] useImageProcessor hook initialized, creating Worker...');
-    initWorker();
+    
+    try {
+      initWorker();
+    } catch (error) {
+      console.error('[DEBUG] Failed to initialize Worker:', error);
+    }
     
     return () => {
       if (workerRef.current) {
@@ -62,20 +79,25 @@ export function useImageProcessor() {
   // 添加 Worker 测试函数
   const testWorker = useCallback(() => {
     console.log('[DEBUG] Testing Worker...');
-    const worker = initWorker();
     
-    // 发送测试消息
-    worker.postMessage({
-      test: true,
-      imageData: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
-      quality: 80,
-      format: 'jpeg',
-      id: 'test-' + Date.now(),
-      originalSize: 100,
-      isMemeMode: false
-    });
-    
-    console.log('[DEBUG] Test message sent to Worker');
+    try {
+      const worker = initWorker();
+      
+      // 发送测试消息
+      worker.postMessage({
+        test: true,
+        imageData: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+        quality: 80,
+        format: 'jpeg',
+        id: 'test-' + Date.now(),
+        originalSize: 100,
+        isMemeMode: false
+      });
+      
+      console.log('[DEBUG] Test message sent to Worker');
+    } catch (error) {
+      console.error('[DEBUG] Failed to test Worker:', error);
+    }
   }, [initWorker]);
 
   // AVIF服务端处理函数

@@ -2,9 +2,15 @@
 // 添加全局错误处理
 self.addEventListener('error', function(event) {
   console.error('[Worker] Global error:', event.error || event.message || 'Unknown error');
+  console.error('[Worker] Error details:', {
+    filename: event.filename,
+    lineno: event.lineno,
+    colno: event.colno,
+    error: event.error
+  });
   self.postMessage({
     success: false,
-    error: `Worker全局错误: ${event.error?.message || event.message || '未知错误'}`
+    error: `Worker全局错误: ${event.error?.message || event.message || '未知错误'} (行:${event.lineno}, 列:${event.colno})`
   });
 });
 
@@ -16,10 +22,74 @@ self.addEventListener('unhandledrejection', function(event) {
   });
 });
 
+// 检查浏览器兼容性
+function checkBrowserSupport() {
+  const support = {
+    offscreenCanvas: typeof OffscreenCanvas !== 'undefined',
+    createImageBitmap: typeof createImageBitmap !== 'undefined',
+    fileReader: typeof FileReader !== 'undefined'
+  };
+  
+  console.log('[Worker] Browser support check:', support);
+  
+  if (!support.offscreenCanvas) {
+    throw new Error('浏览器不支持 OffscreenCanvas，请使用现代浏览器');
+  }
+  
+  if (!support.createImageBitmap) {
+    throw new Error('浏览器不支持 createImageBitmap，请使用现代浏览器');
+  }
+  
+  if (!support.fileReader) {
+    throw new Error('浏览器不支持 FileReader，请使用现代浏览器');
+  }
+  
+  return support;
+}
+
 // Worker 初始化成功确认
-console.log('[Worker] ImageProcessor Worker initialized successfully');
+try {
+  checkBrowserSupport();
+  console.log('[Worker] ImageProcessor Worker initialized successfully');
+  
+  // 发送初始化成功消息
+  self.postMessage({
+    type: 'init',
+    success: true,
+    message: 'Worker initialized successfully'
+  });
+} catch (error) {
+  console.error('[Worker] Initialization failed:', error);
+  self.postMessage({
+    type: 'init',
+    success: false,
+    error: error.message
+  });
+}
 
 self.onmessage = async function(e) {
+  console.log('[Worker] Received message:', {
+    hasImageData: !!e.data.imageData,
+    quality: e.data.quality,
+    format: e.data.format,
+    id: e.data.id,
+    originalSize: e.data.originalSize,
+    isMemeMode: e.data.isMemeMode,
+    test: e.data.test
+  });
+  
+  // 处理测试消息
+  if (e.data.test) {
+    console.log('[Worker] Test message received, sending response...');
+    self.postMessage({
+      type: 'test',
+      success: true,
+      message: 'Worker test successful',
+      timestamp: Date.now()
+    });
+    return;
+  }
+  
   const { imageData, quality, format, id, originalSize, isMemeMode } = e.data;
   
   try {
