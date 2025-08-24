@@ -23,7 +23,9 @@ export function useImageProcessor() {
 
   const initWorker = useCallback(() => {
     if (!workerRef.current) {
-      workerRef.current = new Worker('/workers/imageProcessor.js');
+      // 添加时间戳参数破坏缓存，确保每次都加载最新的 Worker 文件
+      const timestamp = Date.now();
+      workerRef.current = new Worker(`/workers/imageProcessor.js?v=${timestamp}`);
     }
     return workerRef.current;
   }, []);
