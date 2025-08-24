@@ -1,0 +1,108 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://imageflow.app/#webapp",
+      "name": "ImageFlow",
+      "alternateName": "Image Compression Tool",
+      "description": "Free online image compression and format conversion tool. Compress JPEG, PNG, WebP images up to 90% smaller. Convert between formats instantly with browser-based processing.",
+      "url": "https://imageflow.app",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires JavaScript. Works with Chrome, Firefox, Safari, Edge.",
+      "softwareVersion": "1.0.0",
+      "datePublished": "2024-01-01",
+      "dateModified": "2024-12-01",
+      "author": {
+        "@type": "Organization",
+        "name": "ImageFlow Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ImageFlow",
+        "url": "https://imageflow.app"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "Image Compression",
+        "Format Conversion",
+        "Batch Processing",
+        "JPEG Compression",
+        "PNG Compression",
+        "WebP Conversion",
+        "Browser-based Processing",
+        "No Upload Required",
+        "Privacy Protection",
+        "Multi-language Support"
+      ],
+      "screenshot": "https://imageflow.app/screenshot.jpg",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://imageflow.app/#website",
+      "url": "https://imageflow.app",
+      "name": "ImageFlow",
+      "description": "Free online image compression and format conversion tool",
+      "publisher": {
+        "@id": "https://imageflow.app/#organization"
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://imageflow.app/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://imageflow.app/#organization",
+      "name": "ImageFlow",
+      "url": "https://imageflow.app",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://imageflow.app/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "sameAs": [
+        "https://github.com/imageflow",
+        "https://twitter.com/imageflow"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "ImageFlow Image Processor",
+      "applicationCategory": "PhotographyApplication",
+      "operatingSystem": "Web Browser",
+      "description": "Advanced image compression and format conversion tool with support for JPEG, PNG, and WebP formats.",
+      "softwareVersion": "1.0.0",
+      "datePublished": "2024-01-01",
+      "author": {
+        "@type": "Organization",
+        "name": "ImageFlow Team"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+}

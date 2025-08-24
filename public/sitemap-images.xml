@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage Images -->
+  <url>
+    <loc>https://imageflow.app/</loc>
+    <image:image>
+      <image:loc>https://imageflow.app/logo.png</image:loc>
+      <image:title>ImageFlow Logo</image:title>
+      <image:caption>ImageFlow - Professional image compression and format conversion tool</image:caption>
+      <image:geo_location>Global</image:geo_location>
+      <image:license>https://imageflow.app/license</image:license>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/hero-image.jpg</image:loc>
+      <image:title>Image Compression Demo</image:title>
+      <image:caption>Before and after comparison showing 90% file size reduction with maintained quality</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/interface-screenshot.jpg</image:loc>
+      <image:title>ImageFlow User Interface</image:title>
+      <image:caption>Clean and intuitive interface for drag-and-drop image processing</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Feature Images -->
+  <url>
+    <loc>https://imageflow.app/features</loc>
+    <image:image>
+      <image:loc>https://imageflow.app/features/compression-demo.jpg</image:loc>
+      <image:title>Image Compression Feature</image:title>
+      <image:caption>Advanced compression algorithms for JPEG, PNG, and WebP formats</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/features/format-conversion.jpg</image:loc>
+      <image:title>Format Conversion Feature</image:title>
+      <image:caption>Convert between JPEG, PNG, WebP, and other popular image formats</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/features/batch-processing.jpg</image:loc>
+      <image:title>Batch Processing Feature</image:title>
+      <image:caption>Process multiple images simultaneously for improved workflow efficiency</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/features/privacy-security.jpg</image:loc>
+      <image:title>Privacy and Security</image:title>
+      <image:caption>Browser-based processing ensures your images never leave your device</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Tutorial Images -->
+  <url>
+    <loc>https://imageflow.app/tutorials</loc>
+    <image:image>
+      <image:loc>https://imageflow.app/tutorials/step1-upload.jpg</image:loc>
+      <image:title>Step 1: Upload Images</image:title>
+      <image:caption>Drag and drop or click to select images for processing</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/tutorials/step2-settings.jpg</image:loc>
+      <image:title>Step 2: Adjust Settings</image:title>
+      <image:caption>Configure compression quality and output format settings</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/tutorials/step3-download.jpg</image:loc>
+      <image:title>Step 3: Download Results</image:title>
+      <image:caption>Download optimized images individually or as a batch ZIP file</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Comparison Images -->
+  <url>
+    <loc>https://imageflow.app/comparison</loc>
+    <image:image>
+      <image:loc>https://imageflow.app/comparison/before-after-jpeg.jpg</image:loc>
+      <image:title>JPEG Compression Before/After</image:title>
+      <image:caption>JPEG image compressed from 2.5MB to 250KB with minimal quality loss</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/comparison/before-after-png.jpg</image:loc>
+      <image:title>PNG Compression Before/After</image:title>
+      <image:caption>PNG image optimized from 1.8MB to 180KB while preserving transparency</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/comparison/format-comparison.jpg</image:loc>
+      <image:title>Format Comparison Chart</image:title>
+      <image:caption>Visual comparison of file sizes across JPEG, PNG, and WebP formats</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Social Media Images -->
+  <url>
+    <loc>https://imageflow.app/social</loc>
+    <image:image>
+      <image:loc>https://imageflow.app/og-image.jpg</image:loc>
+      <image:title>ImageFlow Open Graph Image</image:title>
+      <image:caption>Social media preview image for ImageFlow sharing</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://imageflow.app/twitter-image.jpg</image:loc>
+      <image:title>ImageFlow Twitter Card Image</image:title>
+      <image:caption>Twitter card image optimized for social media sharing</image:caption>
+    </image:image>
+  </url>
+  
+</urlset>

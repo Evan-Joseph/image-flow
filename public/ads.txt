@@ -1,0 +1,26 @@
+# ads.txt file for ImageFlow - Image Compression Tool
+# This file is required by Google AdSense for ad verification
+# Replace pub-XXXXXXXXXXXXXXXX with your actual AdSense Publisher ID
+
+# Google AdSense
+google.com, pub-1460768247956454, DIRECT, f08c47fec0942fa0
+
+# Google Ad Manager (if using)
+# google.com, pub-1460768247956454, DIRECT, f08c47fec0942fa0
+
+# Additional ad networks (add as needed)
+# Example for other networks:
+# adsystem.com, pub-XXXXXXXXXXXXXXXX, DIRECT
+# doubleclick.net, pub-XXXXXXXXXXXXXXXX, DIRECT
+
+# Reseller relationships (if any)
+# network.com, pub-XXXXXXXXXXXXXXXX, RESELLER, certification-authority-id
+
+# Instructions:
+# 1. Publisher ID has been configured: pub-1460768247956454
+# 2. The format is: domain, publisher-id, relationship-type, certification-authority-id
+# 3. DIRECT means you have a direct relationship with the ad network
+# 4. RESELLER means you work through an intermediary
+# 5. f08c47fec0942fa0 is Google's certification authority ID
+# 6. This file must be accessible at https://yourdomain.com/ads.txt
+# 7. Update this file whenever you add or remove ad networks

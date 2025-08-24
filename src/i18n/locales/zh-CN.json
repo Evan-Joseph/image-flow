@@ -1,0 +1,209 @@
+{
+  "app": {
+    "title": "ImageFlow - 专业图片处理工具",
+    "subtitle": "免费在线图片压缩与格式转换"
+  },
+  "upload": {
+    "title": "上传图片",
+    "dropzone": "拖拽图片到这里，或点击选择文件",
+    "subtitle": "支持 JPG、PNG、WebP、AVIF、HEIC 格式",
+    "limit": "最多 {{maxFiles}} 个文件，总大小不超过 {{maxSize}}MB",
+    "button": "选择文件"
+  },
+  "compression": {
+    "title": "压缩设置",
+    "quality": {
+      "title": "压缩质量",
+      "veryHigh": "极高质量",
+      "high": "高质量",
+      "medium": "中等质量",
+      "low": "低质量",
+      "veryLow": "最低质量",
+      "meme": "Meme风格",
+      "minFile": "最小文件",
+      "bestQuality": "最佳质量",
+      "minFileShort": "小",
+      "bestQualityShort": "大"
+    },
+    "format": "输出格式",
+    "formats": {
+      "jpeg": "适合照片，文件小",
+      "png": "支持透明，无损压缩",
+      "webp": "现代格式，压缩率高",
+      "avif": "最新格式，最佳压缩"
+    },
+    "processing": "处理中...",
+    "uploadFirst": "请先上传图片",
+    "startProcessing": "开始处理 ({{count}} 张图片)",
+    "avifFormat": "AVIF格式",
+    "avifDescription": "将优先使用服务端处理以获得最佳质量，如果失败会自动降级到客户端处理。",
+    "memeMode": {
+      "title": "\"压片战争\"模式",
+      "description": "极端压缩，制作低质量搞笑图片",
+      "warning": "注意",
+      "warningDescription": "此模式将图片压缩到极低质量(5-15%)，适合制作搞笑meme图片，不适合正常使用。",
+      "intensity": "压缩强度",
+      "light": "轻度",
+      "medium": "中度",
+      "heavy": "重度"
+    },
+    "applyAll": "应用到全部"
+  },
+  "preview": {
+    "title": "实时预览对比",
+    "original": "原图",
+    "compressed": "压缩后",
+    "originalSize": "原始大小",
+    "compressedSize": "压缩后大小",
+    "compressionRatio": "压缩率",
+    "processing": "处理中...",
+    "selectImageHint": "选择图片后将显示预览对比",
+    "zoomOut": "缩小",
+    "zoomIn": "放大",
+    "resetZoom": "重置缩放",
+    "saved": "节省",
+    "notProcessed": "未处理",
+    "dragHint": "拖拽中间的分割线来对比压缩前后的效果"
+  },
+  "imageList": {
+    "title": "图片列表",
+    "empty": "还没有上传任何图片",
+    "hoverTip": "点击此处预览",
+    "originalSize": "原始大小",
+    "compressedSize": "压缩后大小",
+    "status": {
+      "pending": "等待处理",
+      "processing": "处理中",
+      "completed": "已完成",
+      "failed": "处理失败"
+    },
+    "actions": {
+      "download": "下载",
+      "downloadShort": "下载",
+      "retry": "重试",
+      "remove": "移除"
+    }
+  },
+  "batch": {
+    "title": "批量处理",
+    "start": "开始处理",
+    "downloadAll": "打包下载",
+    "progress": "处理进度",
+    "completed": "已完成",
+    "imageCount": "{{count}} 张图片",
+    "pending": "待处理",
+    "processing": "处理中",
+    "failed": "失败",
+    "compressionStats": "压缩统计",
+    "originalSize": "原始大小",
+    "compressedSize": "压缩后",
+    "saved": "节省",
+    "remainingTime": "剩余时间",
+    "estimatedTimeSeconds": "约 {{seconds}} 秒",
+    "estimatedTimeMinutes": "约 {{minutes}} 分钟",
+    "noPendingImages": "没有待处理图片",
+    "startProcessing": "开始处理 ({{count}} 张)",
+    "quality": "压缩质量",
+    "outputFormat": "输出格式"
+  },
+  "errors": {
+    "title": "问题和错误",
+    "summary": "共 {{count}} 个问题",
+    "errorCount": "{{count}} 个错误",
+    "warningCount": "{{count}} 个警告",
+    "retryAll": "重试全部",
+    "clearAll": "清除全部",
+    "retry": "重试",
+    "dismiss": "忽略",
+    "expand": "展开",
+    "collapse": "收起",
+    "errorDescription": "这是一个错误，可能影响功能正常使用",
+    "warningDescription": "这是一个警告，功能可能受到轻微影响"
+  },
+  "statistics": {
+    "title": "处理统计",
+    "noImages": "还没有处理任何图片",
+    "uploadHint": "上传并处理图片后将显示统计信息",
+    "completed": "{{completed}}/{{total}} 已完成",
+    "totalFiles": "总文件数",
+    "totalOriginalSize": "原始总大小",
+    "totalCompressedSize": "压缩后总大小",
+    "totalSaved": "节省空间",
+    "averageCompression": "平均压缩率",
+    "successRate": "成功率",
+    "sizeComparison": "文件大小对比",
+    "originalSize": "原始大小",
+    "compressedSize": "压缩后大小",
+    "compressionRatio": "压缩率",
+    "spaceSaved": "节省空间",
+    "formatAnalysis": "格式分析",
+    "fileCount": "{{count}} 个文件",
+    "saved": "{{size}} 节省",
+    "bestFormat": "最佳压缩格式",
+    "bestFormatDescription": "根据压缩效果推荐的最佳格式",
+    "processingFailed": "处理失败",
+    "failedDescription": "{{count}} 个文件处理失败"
+  },
+
+  "theme": {
+    "light": "亮色模式",
+    "dark": "暗色模式",
+    "comfort": "护眼模式"
+  },
+  "language": {
+    "title": "语言",
+    "zh-CN": "中文",
+    "en-US": "English"
+  },
+  "ads": {
+    "header": "头部广告",
+    "sidebar": "侧边栏广告",
+    "footer": "页脚广告",
+    "title": "广告",
+    "devEnvironment": "开发环境",
+    "position": "位置",
+    "format": "格式",
+    "responsive": "响应式",
+    "yes": "是",
+    "no": "否",
+    "show": "显示广告",
+    "hide": "隐藏广告",
+    "label": "广告",
+    "loadFailed": "广告加载失败",
+    "retry": "重试",
+    "loading": "加载广告中..."
+   },
+   "footer": {
+    "privacy": "您的图片仅在浏览器中处理，绝不上传至服务器",
+    "copyright": "© 2025 ImageFlow. 保留所有权利。"
+  },
+  "about": {
+    "title": "关于 ImageFlow",
+    "description": "ImageFlow 是一个专业的在线图片处理工具，专注于图片压缩与格式转换。我们致力于为用户提供无缝、高效、安全的图片处理体验。"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "description": "您的图片仅在浏览器中处理，绝不上传至服务器。我们重视您的隐私，所有处理过程都在本地完成，确保您的数据安全。"
+  },
+  "messages": {
+    "fileTypeError": "文件格式不支持，请上传图片文件",
+    "fileSizeError": "文件大小超过限制",
+    "fileCountError": "文件数量超过限制",
+    "processingError": "图片处理失败",
+    "downloadError": "下载失败",
+    "success": "操作成功",
+    "networkError": "网络连接失败，请检查网络连接后重试",
+    "fileTooLarge": "文件过大，最大支持 {{maxSize}}",
+    "unsupportedFormat": "不支持的文件格式: {{format}}",
+    "processingFailed": "图片处理失败: {{reason}}",
+    "quotaExceeded": "处理配额已用完，请稍后再试",
+    "serverError": "服务器错误 ({{status}}): {{message}}",
+    "unknownError": "发生未知错误",
+    "unknownFormat": "未知格式",
+    "unknownReason": "未知原因",
+    "internalError": "内部错误",
+    "filteredNonImageFiles": "已过滤 {{count}} 个非图片文件",
+    "fileCountExceeded": "文件数量超过限制，最多支持 {{maxFiles}} 个文件",
+    "totalSizeExceeded": "文件总大小超过限制，最大支持 {{maxSize}}MB"
+  }
+}

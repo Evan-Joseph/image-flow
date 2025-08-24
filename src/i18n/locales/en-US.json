@@ -1,0 +1,209 @@
+{
+  "app": {
+    "title": "ImageFlow - Professional Image Processing Tool",
+    "subtitle": "Free Online Image Compression & Format Conversion"
+  },
+  "upload": {
+    "title": "Upload Images",
+    "dropzone": "Drag images here, or click to select files",
+    "subtitle": "Supports JPG, PNG, WebP, AVIF, HEIC formats",
+    "limit": "Max {{maxFiles}} files, total size under {{maxSize}}MB",
+    "button": "Select Files"
+  },
+  "compression": {
+    "title": "Compression Settings",
+    "quality": {
+      "title": "Compression Quality",
+      "veryHigh": "Very High Quality",
+      "high": "High Quality",
+      "medium": "Medium Quality",
+      "low": "Low Quality",
+      "veryLow": "Very Low Quality",
+      "meme": "Meme Style",
+      "minFile": "Min File Size",
+      "bestQuality": "Best Quality",
+      "minFileShort": "Min",
+      "bestQualityShort": "Max"
+    },
+    "format": "Output Format",
+    "formats": {
+      "jpeg": "Good for photos, small file size",
+      "png": "Supports transparency, lossless",
+      "webp": "Modern format, high compression",
+      "avif": "Latest format, best compression"
+    },
+    "processing": "Processing...",
+    "uploadFirst": "Please upload images first",
+    "startProcessing": "Start Processing ({{count}} images)",
+    "avifFormat": "AVIF Format",
+    "avifDescription": "Will prioritize server-side processing for best quality, with automatic fallback to client-side processing if needed.",
+    "memeMode": {
+      "title": "Meme Mode",
+      "description": "Extreme compression for funny low-quality images",
+      "warning": "Warning",
+      "warningDescription": "This mode compresses images to extremely low quality (5-15%), perfect for creating funny meme images, not suitable for normal use.",
+      "intensity": "Compression Intensity",
+      "light": "Light",
+      "medium": "Medium",
+      "heavy": "Heavy"
+    },
+    "applyAll": "Apply to All"
+  },
+  "preview": {
+    "title": "Live Preview Comparison",
+    "original": "Original",
+    "compressed": "Compressed",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed Size",
+    "compressionRatio": "Compression Ratio",
+    "processing": "Processing...",
+    "selectImageHint": "Preview comparison will be displayed after selecting images",
+    "zoomOut": "Zoom Out",
+    "zoomIn": "Zoom In",
+    "resetZoom": "Reset Zoom",
+    "saved": "Saved",
+    "notProcessed": "Not Processed",
+    "dragHint": "Drag the divider to compare before and after compression"
+  },
+  "imageList": {
+    "title": "Image List",
+    "empty": "No images uploaded yet",
+    "hoverTip": "Click to preview",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed Size",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "completed": "Completed",
+      "failed": "Failed"
+    },
+    "actions": {
+      "download": "Download",
+      "downloadShort": "DL",
+      "retry": "Retry",
+      "remove": "Remove"
+    }
+  },
+  "batch": {
+    "title": "Batch Processing",
+    "start": "Start Processing",
+    "downloadAll": "Download All",
+    "progress": "Progress",
+    "completed": "Completed",
+    "imageCount": "{{count}} images",
+    "pending": "Pending",
+    "processing": "Processing",
+    "failed": "Failed",
+    "compressionStats": "Compression Statistics",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed",
+    "saved": "Saved",
+    "remainingTime": "Remaining Time",
+    "estimatedTimeSeconds": "About {{seconds}} seconds",
+    "estimatedTimeMinutes": "About {{minutes}} minutes",
+    "noPendingImages": "No pending images",
+    "startProcessing": "Start Processing ({{count}} images)",
+    "quality": "Compression Quality",
+    "outputFormat": "Output Format"
+  },
+  "errors": {
+    "title": "Issues and Errors",
+    "summary": "{{count}} issues total",
+    "errorCount": "{{count}} errors",
+    "warningCount": "{{count}} warnings",
+    "retryAll": "Retry All",
+    "clearAll": "Clear All",
+    "retry": "Retry",
+    "dismiss": "Dismiss",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "errorDescription": "This is an error that may affect functionality",
+    "warningDescription": "This is a warning that may slightly affect functionality"
+  },
+  "statistics": {
+    "title": "Processing Statistics",
+    "noImages": "No images processed yet",
+    "uploadHint": "Statistics will be displayed after uploading and processing images",
+    "completed": "{{completed}}/{{total}} completed",
+    "totalFiles": "Total Files",
+    "totalOriginalSize": "Total Original Size",
+    "totalCompressedSize": "Total Compressed Size",
+    "totalSaved": "Space Saved",
+    "averageCompression": "Average Compression",
+    "successRate": "Success Rate",
+    "sizeComparison": "File Size Comparison",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed Size",
+    "compressionRatio": "Compression Ratio",
+    "spaceSaved": "Space Saved",
+    "formatAnalysis": "Format Analysis",
+    "fileCount": "{{count}} files",
+    "saved": "{{size}} saved",
+    "bestFormat": "Best Compression Format",
+    "bestFormatDescription": "Recommended best format based on compression performance",
+    "processingFailed": "Processing Failed",
+    "failedDescription": "{{count}} files failed to process"
+  },
+
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "comfort": "Comfort Mode"
+  },
+  "language": {
+    "title": "Language",
+    "zh-CN": "中文",
+    "en-US": "English"
+  },
+  "ads": {
+    "header": "Header Ad",
+    "sidebar": "Sidebar Ad",
+    "footer": "Footer Ad",
+    "title": "Advertisement",
+    "devEnvironment": "Dev Environment",
+    "position": "Position",
+    "format": "Format",
+    "responsive": "Responsive",
+    "yes": "Yes",
+    "no": "No",
+    "show": "Show Ad",
+    "hide": "Hide Ad",
+    "label": "Ad",
+    "loadFailed": "Ad failed to load",
+    "retry": "Retry",
+    "loading": "Loading ad..."
+   },
+   "footer": {
+    "privacy": "Your images are processed only in the browser, never uploaded to servers",
+    "copyright": "© 2025 ImageFlow. All rights reserved."
+  },
+  "about": {
+    "title": "About ImageFlow",
+    "description": "ImageFlow is a professional online image processing tool focused on image compression and format conversion. We are committed to providing users with seamless, efficient, and secure image processing experience."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "Your images are processed only in the browser and never uploaded to servers. We value your privacy, and all processing is done locally to ensure your data security."
+  },
+  "messages": {
+    "fileTypeError": "Unsupported file format, please upload image files",
+    "fileSizeError": "File size exceeds limit",
+    "fileCountError": "File count exceeds limit",
+    "processingError": "Image processing failed",
+    "downloadError": "Download failed",
+    "success": "Operation successful",
+    "networkError": "Network connection failed, please check your connection and try again",
+    "fileTooLarge": "File too large, maximum supported size is {{maxSize}}",
+    "unsupportedFormat": "Unsupported file format: {{format}}",
+    "processingFailed": "Image processing failed: {{reason}}",
+    "quotaExceeded": "Processing quota exceeded, please try again later",
+    "serverError": "Server error ({{status}}): {{message}}",
+    "unknownError": "Unknown error occurred",
+    "unknownFormat": "unknown format",
+    "unknownReason": "unknown reason",
+    "internalError": "internal error",
+    "filteredNonImageFiles": "Filtered {{count}} non-image files",
+    "fileCountExceeded": "File count exceeds limit, maximum {{maxFiles}} files supported",
+    "totalSizeExceeded": "Total file size exceeds limit, maximum {{maxSize}}MB supported"
+  }
+}

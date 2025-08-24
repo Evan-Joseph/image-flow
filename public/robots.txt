@@ -1,0 +1,55 @@
+# Robots.txt for ImageFlow - Image Compression Tool
+# https://imageflow.app
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.env
+Disallow: /api/internal/
+
+# Allow important resources
+Allow: /src/
+Allow: /public/
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+Allow: /*.ico
+
+# Sitemap location
+Sitemap: https://imageflow.app/sitemap.xml
+Sitemap: https://imageflow.app/sitemap-images.xml
+
+# Crawl delay (optional - be respectful)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block unwanted bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
