@@ -1,4 +1,4 @@
-// 图片处理Worker - 增强版
+// 图片处理Worker - 增强版 v2.1.0 (Build: 20250124-1756)
 // 添加全局错误处理
 self.addEventListener('error', function(event) {
   console.error('[Worker] Global error:', event.error || event.message || 'Unknown error');
