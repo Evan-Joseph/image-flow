@@ -24,6 +24,13 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 // 请求日志中间件
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  
+  // 特别记录 /workers/ 路径的请求
+  if (req.path.startsWith('/workers/')) {
+    console.log(`[WORKER REQUEST] ${req.method} ${req.path} - User-Agent: ${req.get('User-Agent')}`);
+    console.log(`[WORKER REQUEST] Headers:`, req.headers);
+  }
+  
   next();
 });
 
@@ -40,6 +47,33 @@ app.post('/api/analytics/web-vitals', (req, res) => {
   console.log('Web Vitals:', { name, value, id, delta });
   
   res.json({ success: true, message: 'Web vitals data received' });
+});
+
+// 测试路由 - 直接返回 imageProcessor.js 文件内容
+app.get('/test/worker', (req, res) => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const workerPath = path.join(__dirname, '../../dist/workers/imageProcessor.js');
+  
+  console.log(`[TEST WORKER] Attempting to read file: ${workerPath}`);
+  
+  try {
+    const fs = require('fs');
+    if (fs.existsSync(workerPath)) {
+      const content = fs.readFileSync(workerPath, 'utf8');
+      console.log(`[TEST WORKER] File exists, size: ${content.length} bytes`);
+      console.log(`[TEST WORKER] First 100 chars: ${content.substring(0, 100)}`);
+      
+      res.setHeader('Content-Type', 'application/javascript');
+      res.send(content);
+    } else {
+      console.log(`[TEST WORKER] File does not exist at: ${workerPath}`);
+      res.status(404).json({ error: 'Worker file not found', path: workerPath });
+    }
+  } catch (error) {
+    console.error(`[TEST WORKER] Error reading file:`, error);
+    res.status(500).json({ error: 'Failed to read worker file', details: error.message });
+  }
 });
 
 // 健康检查
