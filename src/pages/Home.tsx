@@ -8,10 +8,12 @@ import ImagePreview from '../components/ImagePreview';
 import BatchProcessor from '../components/BatchProcessor';
 import ErrorHandler, { createErrorInfo, ErrorTypes, getErrorMessage } from '../components/ErrorHandler';
 import StatisticsPanel, { calculateStatistics } from '../components/StatisticsPanel';
+import AdBlockerModal from '../components/AdBlockerModal';
 
 import ThemeToggle from '../components/ThemeToggle';
 import LanguageToggle from '../components/LanguageToggle';
 import { useImageProcessor } from '../hooks/useImageProcessor';
+import { useAdBlockerModal } from '../hooks/useAdBlockerModal';
 import JSZip from 'jszip';
 
 interface ImageItem {
@@ -46,6 +48,7 @@ const Home: React.FC = () => {
     onDismiss?: () => void;
   }>>([]);
   const { processImages, processImage, testWorker } = useImageProcessor();
+  const { isModalOpen, closeModal } = useAdBlockerModal();
 
   // Worker 测试函数
   const handleTestWorker = useCallback(() => {
@@ -497,6 +500,9 @@ const Home: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* AdBlocker 提示弹窗 */}
+      <AdBlockerModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };
