@@ -55,7 +55,7 @@ app.get('/test/worker', (req, res) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   // 修复路径：与静态文件服务保持一致
-  const workerPath = path.join(__dirname, '../..', 'workers', 'imageProcessor.js');
+  const workerPath = path.join(__dirname, '..', 'workers', 'imageProcessor.js');
   
   console.log(`[TEST WORKER] Attempting to read file: ${workerPath}`);
   
@@ -95,7 +95,7 @@ if (process.env.NODE_ENV === 'production') {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   // 修复路径：编译后的文件在 dist/api/app.js，所以静态文件在 dist/ 目录
-  const staticPath = path.join(__dirname, '../..');
+  const staticPath = path.join(__dirname, '..');
   
   console.log(`[STATIC FILES] Static path: ${staticPath}`);
   console.log(`[STATIC FILES] __dirname: ${__dirname}`);
