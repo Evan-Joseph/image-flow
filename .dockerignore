@@ -6,7 +6,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # 构建输出
-dist
+# dist - 注释掉，因为我们需要在容器中构建后保留 dist 目录
 build
 .next
 out
