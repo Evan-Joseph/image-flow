@@ -83,7 +83,7 @@ jspm_packages/
 
 # Gatsby 文件
 .cache/
-public
+# public - 注释掉，因为我们需要 public 目录中的 workers 文件
 
 # Storybook 构建输出
 .out
