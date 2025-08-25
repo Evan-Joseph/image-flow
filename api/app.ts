@@ -53,7 +53,8 @@ app.post('/api/analytics/web-vitals', (req, res) => {
 app.get('/test/worker', (req, res) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const workerPath = path.join(__dirname, '../../dist/workers/imageProcessor.js');
+  // 修复路径：与静态文件服务保持一致
+  const workerPath = path.join(__dirname, '../..', 'workers', 'imageProcessor.js');
   
   console.log(`[TEST WORKER] Attempting to read file: ${workerPath}`);
   
@@ -93,12 +94,32 @@ app.get('/api/health', (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const staticPath = path.join(__dirname, '../../dist');
+  // 修复路径：编译后的文件在 dist/api/app.js，所以静态文件在 dist/ 目录
+  const staticPath = path.join(__dirname, '../..');
+  
+  console.log(`[STATIC FILES] Static path: ${staticPath}`);
+  console.log(`[STATIC FILES] __dirname: ${__dirname}`);
+  console.log(`[STATIC FILES] __filename: ${__filename}`);
+  
+  // 验证静态文件目录是否存在
+  const fs = require('fs');
+  if (fs.existsSync(staticPath)) {
+    console.log(`[STATIC FILES] Static directory exists`);
+    const workerPath = path.join(staticPath, 'workers', 'imageProcessor.js');
+    if (fs.existsSync(workerPath)) {
+      console.log(`[STATIC FILES] Worker file exists at: ${workerPath}`);
+    } else {
+      console.log(`[STATIC FILES] Worker file NOT found at: ${workerPath}`);
+    }
+  } else {
+    console.log(`[STATIC FILES] Static directory NOT found: ${staticPath}`);
+  }
   
   // 静态文件服务，设置正确的MIME类型
   app.use(express.static(staticPath, {
-    setHeaders: (res, path) => {
-      if (path.endsWith('.js')) {
+    setHeaders: (res, filePath) => {
+      console.log(`[STATIC FILES] Serving file: ${filePath}`);
+      if (filePath.endsWith('.js')) {
         res.setHeader('Content-Type', 'application/javascript');
       }
     }
