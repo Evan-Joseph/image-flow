@@ -19,6 +19,9 @@ COPY . .
 # 构建前端
 RUN pnpm run build
 
+# 确保 Worker 文件存在（防止构建过程中丢失）
+RUN mkdir -p dist/workers && cp public/workers/imageProcessor.js dist/workers/imageProcessor.js
+
 # 编译 TypeScript 后端代码
 RUN pnpm run server:build
 
