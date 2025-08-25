@@ -1,6 +1,6 @@
 {
   "build_command": "pnpm run build && pnpm run server:build",
-  "start_command": "node dist/server.js",
+  "start_command": "node dist/api/server.js",
   "install_command": "pnpm install --frozen-lockfile",
   "node_version": "18",
   "package_manager": "pnpm"
