@@ -120,8 +120,6 @@ if (process.env.NODE_ENV === 'production') {
       console.log(`[STATIC FILES] Serving file: ${filePath}`);
       if (filePath.endsWith('.js')) {
         res.setHeader('Content-Type', 'application/javascript');
-      } else if (filePath.endsWith('.css')) {
-        res.setHeader('Content-Type', 'text/css');
       }
     }
   }));

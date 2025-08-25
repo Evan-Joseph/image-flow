@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Download, Package } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import DropZone from '../components/DropZone';
@@ -8,12 +8,11 @@ import ImagePreview from '../components/ImagePreview';
 import BatchProcessor from '../components/BatchProcessor';
 import ErrorHandler, { createErrorInfo, ErrorTypes, getErrorMessage } from '../components/ErrorHandler';
 import StatisticsPanel, { calculateStatistics } from '../components/StatisticsPanel';
-import AdBlockerModal from '../components/AdBlockerModal';
+import AdBlockerNotice from '../components/AdBlockerNotice';
 
 import ThemeToggle from '../components/ThemeToggle';
 import LanguageToggle from '../components/LanguageToggle';
 import { useImageProcessor } from '../hooks/useImageProcessor';
-import { useAdBlockerModal } from '../hooks/useAdBlockerModal';
 import JSZip from 'jszip';
 
 interface ImageItem {
@@ -39,6 +38,7 @@ const Home: React.FC = () => {
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [previewCompressedData, setPreviewCompressedData] = useState<string | null>(null);
   const [isPreviewProcessing, setIsPreviewProcessing] = useState(false);
+  const [showAdBlockerNotice, setShowAdBlockerNotice] = useState(false);
   const [errors, setErrors] = useState<Array<{
     id: string;
     message: string;
@@ -48,7 +48,24 @@ const Home: React.FC = () => {
     onDismiss?: () => void;
   }>>([]);
   const { processImages, processImage, testWorker } = useImageProcessor();
-  const { isModalOpen, closeModal } = useAdBlockerModal();
+
+  // 检查是否需要显示 ADBlocker 提示
+  useEffect(() => {
+    const hasSeenNotice = localStorage.getItem('imageflow_adblocker_notice_seen');
+    if (!hasSeenNotice) {
+      // 延迟显示，让页面先加载完成
+      const timer = setTimeout(() => {
+        setShowAdBlockerNotice(true);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // 处理 ADBlocker 提示关闭
+  const handleAdBlockerNoticeClose = useCallback(() => {
+    setShowAdBlockerNotice(false);
+    localStorage.setItem('imageflow_adblocker_notice_seen', 'true');
+  }, []);
 
   // Worker 测试函数
   const handleTestWorker = useCallback(() => {
@@ -501,8 +518,10 @@ const Home: React.FC = () => {
         </div>
       </footer>
 
-      {/* AdBlocker 提示弹窗 */}
-      <AdBlockerModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* ADBlocker 提示弹窗 */}
+      {showAdBlockerNotice && (
+        <AdBlockerNotice onClose={handleAdBlockerNoticeClose} />
+      )}
     </div>
   );
 };
