@@ -23,12 +23,10 @@ export function useImageProcessor() {
 
   const initWorker = useCallback(() => {
     if (!workerRef.current) {
-      // 添加时间戳参数破坏缓存，确保每次都加载最新的 Worker 文件
-      const timestamp = Date.now();
-      console.log('[DEBUG] Creating Worker with timestamp:', timestamp);
+      console.log('[DEBUG] Creating Worker...');
       
       try {
-        workerRef.current = new Worker(`/workers/imageProcessor.js?v=${timestamp}`);
+        workerRef.current = new Worker('/workers/imageProcessor.js');
         console.log('[DEBUG] Worker created successfully');
         
         // 监听 Worker 消息
@@ -77,7 +75,7 @@ export function useImageProcessor() {
         });
         
         // 验证 Worker 文件是否可访问
-        const workerUrl = `/workers/imageProcessor.js?t=${timestamp}`;
+        const workerUrl = '/workers/imageProcessor.js';
         console.log('[DEBUG] Verifying Worker file accessibility:', workerUrl);
         
         fetch(workerUrl)

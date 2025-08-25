@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import convertAvifRoutes from './routes/convert-avif.js';
@@ -59,7 +60,6 @@ app.get('/test/worker', (req, res) => {
   console.log(`[TEST WORKER] Attempting to read file: ${workerPath}`);
   
   try {
-    const fs = require('fs');
     if (fs.existsSync(workerPath)) {
       const content = fs.readFileSync(workerPath, 'utf8');
       console.log(`[TEST WORKER] File exists, size: ${content.length} bytes`);
@@ -102,7 +102,6 @@ if (process.env.NODE_ENV === 'production') {
   console.log(`[STATIC FILES] __filename: ${__filename}`);
   
   // 验证静态文件目录是否存在
-  const fs = require('fs');
   if (fs.existsSync(staticPath)) {
     console.log(`[STATIC FILES] Static directory exists`);
     const workerPath = path.join(staticPath, 'workers', 'imageProcessor.js');
