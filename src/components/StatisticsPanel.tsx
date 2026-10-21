@@ -91,7 +91,7 @@ export default function StatisticsPanel({ data, className = '' }: StatisticsPane
       </div>
 
       {/* 主要统计卡片 */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
+      <div className="grid grid-cols-2 gap-3 md:gap-4 mb-4 md:mb-6">
         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 md:p-4 text-center">
           <FileText className="w-5 h-5 md:w-6 md:h-6 text-blue-600 dark:text-blue-400 mx-auto mb-1 md:mb-2" />
           <div className="text-lg md:text-2xl font-bold text-blue-900 dark:text-blue-100">

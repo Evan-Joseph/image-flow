@@ -1,117 +1,114 @@
-# 🖼️ ImageFlow (图片批量压缩与格式转换工具)
+# ImageFlow — 浏览器端批量图像压缩与格式转换工具
 
 <p align="center">
-  <b>A Browser-First, Privacy-Focused Image Compression & Conversion Suite</b><br>
-  纯客户端本地处理 · 零上传隐私保护 · 支持 WebP / AVIF 现代格式与批量生产流
+  <img src="https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Web_Workers-OffscreenCanvas-FF6F00" alt="Web Workers" />
+  <img src="https://img.shields.io/badge/Express-AVIF_Fallback-000000?logo=express&logoColor=white" alt="Express" />
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" />
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black" alt="React 18">
-  <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Vite-6.3-646CFF?logo=vite&logoColor=white" alt="Vite">
-  <img src="https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
-  <img src="https://img.shields.io/badge/Format-WebP%20%7C%20AVIF%20%7C%20PNG%20%7C%20JPEG-blue" alt="Formats">
-  <img src="https://img.shields.io/badge/Privacy-100%25%20Client--Side-brightgreen" alt="100% Client-Side">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT">
+  <img src="assets/screenshots/01_workspace.png" width="96%" alt="ImageFlow 批量图像压缩工作台" />
 </p>
 
-<p align="center">
-  <img src="assets/image_flow_banner.png" width="100%" alt="ImageFlow Banner" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.12);" />
-</p>
+**ImageFlow** 是一款基于浏览器 Web Worker 与 `OffscreenCanvas` 的本地批量图像压缩与格式转换应用。常规 JPEG、PNG、WebP 压缩流程完全在浏览器本地异步线程中完成，无需将原始图片上传至远端服务器；针对部分浏览器尚未原生支持编码的 AVIF 格式，提供可选的 Node.js / Express 服务端转换降级接口。
 
 ---
 
-## 🖥️ 实机运行桌面端全景 (Live Desktop Preview)
+## 界面预览
 
-<p align="center">
-  <img src="assets/screenshots/01_home_desktop.png" width="900" alt="ImageFlow Live Desktop Workspace" style="border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.15);" />
-</p>
-
-<p align="center">
-  <i>实机运行界面：拖拽上传区、批量处理队列、WebP/AVIF 参数控制滑块与中英/三套主题切换器</i>
-</p>
-
----
-
-## 📖 项目简介 (Overview)
-
-**ImageFlow** 是一个现代化的轻量级图片批量压缩与格式转换工具。
-
-与传统的云端图片处理服务不同，ImageFlow 默认将**全部压缩、重采样与转码计算置于浏览器本地沙箱内完成**（借助 HTML5 Canvas 与现代浏览器编码 API）。原始图像绝不上传至任何远端服务器，从物理层面上保障了敏感文档、研发资产与个人照片的绝对隐私。
-
----
-
-## 🛠️ 基于源码的核心功能架构 (Code Grounding)
-
-1. **纯端侧离线压缩 (`src/hooks/useImageProcessor.ts`)**：
-   - 基于 HTML5 Canvas 2D 上下文与浏览器原生 WebCodecs/ImageBitmap 接口处理；
-   - 目标格式互转：PNG、JPEG、新一代 WebP 与 AVIF；
-   - 自由调节压缩质量系数 (0% - 100%)，支持等比缩放分辨率与限制最大文件尺寸。
-2. **批量处理流水线 (`src/components/BatchProcessor.tsx` + `DropZone.tsx`)**：
-   - 采用多任务并发控制队列，支持同时拖拽数十张高分辨率图片；
-   - 支持逐张调节独立参数或一键应用全局预设；
-   - 基于 `JSZip` 库实现客户端一键打包为 ZIP 归档下载。
-3. **即时画质比对 (`src/components/ImagePreview.tsx`)**：
-   - 实时计算体积缩减百分比（如 -75%）与节省字节数；
-   - 提供前后画质对比视图，精准把控噪点与细节留存。
-4. **多套主题与中英双语 (`ThemeContext.tsx` + `i18n/`)**：
-   - 内置浅色 (Light)、深色 (Dark) 以及低饱和度护眼 (Eye-Care) 三套设计主题；
-   - 完整覆盖简体中文与英文界面。
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="assets/screenshots/01_workspace.png" width="100%" alt="批量上传、压缩参数与实时统计面板" />
+      <br />
+      <sub><b>批量处理工作台</b>：拖拽上传、质量/格式参数调节、总体体积节省统计与 ZIP 打包导出</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="assets/screenshots/02_preview_stats.png" width="100%" alt="单图实时对比预览与任务卡片列表" />
+      <br />
+      <sub><b>单图对比与统计图表</b>：原图/压缩图双栏预览、单文件压缩率明细与 Chart.js 统计视图</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 📊 常见格式压缩对比 (Compression Benchmarks)
+## 核心功能
 
-| 原始格式 | 目标格式 | 压缩质量 (Quality) | 平均体积降幅 (Size Reduction) | 适用场景 |
-|---|---|:---:|:---:|---|
-| PNG (截屏/图表) | **WebP** | 80% | **-72%** | Web 前端静态资源加速 |
-| JPEG (高清摄影) | **AVIF** | 75% | **-81%** | 移动端高保真画报展示 |
-| JPEG / PNG | **JPEG** | 70% | **-54%** | 通用传统客户端兼容 |
+- **Web Worker 本地并行处理**：通过 `public/workers/imageProcessor.js` 在独立工作线程中调用 `OffscreenCanvas` 与 `createImageBitmap` 执行重采样和重编码，避免批量大图阻塞主线程 UI。
+- **多格式互转与质量分级**：支持输出 `WebP`、`JPEG`、`PNG` 与 `AVIF` 四种格式，提供 10%–100% 连续质量滑块，以及极端低码率包浆效果（Meme Mode，5%–15% 质量叠加降采样）。
+- **实时预览与 ZIP 批量归档**：点击任意图片卡片即可触发单图实时重编码对比，支持单张独立下载或通过 `JSZip` 将全部已完成图片一键打包为 `.zip` 归档。
+- **多语言与主题切换**：内置 `i18next` 中英双语切换与浅色/深色/护眼主题（`src/contexts/ThemeContext.tsx`）。
 
 ---
 
-## 📦 项目代码结构 (Directory Layout)
+## 技术栈与目录结构
+
+| 模块 | 技术选型 | 说明 |
+| :--- | :--- | :--- |
+| 前端框架 | React 18.3 + TypeScript 5.8 + Vite 6 | 响应式单页应用，集成 `react-dropzone` 拖拽上传 |
+| 图像处理内核 | Web Workers + `OffscreenCanvas` + `JSZip` | 浏览器端异步图像编解码与本地 ZIP 归档 |
+| 可视化与样式 | Tailwind CSS 3.4 + Chart.js (`react-chartjs-2`) | 压缩率分布统计图表与多主题适配 |
+| 可选服务端 | Express 4 (`api/`) | 供不支持客户端 AVIF 编码的环境执行服务端转换 |
 
 ```text
 image-flow/
-├── assets/screenshots/      # 从实机运行环境中抓取的真实 UI 截屏
+├── api/                     # 可选 Express 服务端（AVIF 转换与健康检查路由）
+├── public/
+│   └── workers/
+│       └── imageProcessor.js # 浏览器端 OffscreenCanvas 图像压缩 Worker
 ├── src/
-│   ├── components/          # DropZone, CompressionPanel, BatchProcessor, ImagePreview
-│   ├── contexts/            # 主题状态上下文 (ThemeContext.tsx)
-│   ├── hooks/               # useImageProcessor (核心 Canvas 转换算法)
-│   ├── i18n/                # 国际化词表 (zh-CN.json, en-US.json)
-│   ├── pages/               # Home (单页应用工作台)
-│   └── utils/               # 性能度量 (performance.ts) 与字节换算
-├── api/                     # 可选的 Express 代理服务器
-└── package.json
+│   ├── components/
+│   │   ├── BatchProcessor.tsx   # 批量队列进度、总体节省率与 ZIP 打包下载
+│   │   ├── CompressionPanel.tsx # 质量滑块、目标格式与 Meme 模式控制面板
+│   │   ├── DropZone.tsx         # 拖拽上传与文件大小/格式校验
+│   │   ├── ImageList.tsx        # 懒加载缩略图卡片列表与单图下载
+│   │   ├── ImagePreview.tsx     # 原图与压缩后图像双栏对比视图
+│   │   └── StatisticsPanel.tsx  # 压缩前后体积对比统计面板
+│   ├── contexts/            # 主题状态上下文
+│   ├── hooks/               # Web Worker 生命周期与队列调度 (useImageProcessor)
+│   ├── i18n/                # 中英文国际化词典
+│   └── pages/               # 主工作台页面 (Home.tsx)
+└── Dockerfile               # 容器化构建配置
 ```
 
 ---
 
-## 🚀 快速开始 (Quickstart)
+## 快速开始
 
-### 1. 安装与本地启动
+### 1. 安装依赖
 
 ```bash
 git clone https://github.com/Evan-Joseph/image-flow.git
 cd image-flow
 pnpm install
-pnpm dev
 ```
 
-在浏览器打开 `http://localhost:5173` 即可立即体验高速离线压缩。
+### 2. 启动开发环境
 
-### 2. 生产构建与预览
+仅启动前端工作台（推荐，默认使用浏览器本地 Worker 处理）：
 
 ```bash
-pnpm build
-pnpm preview
+pnpm run client:dev
 ```
 
-构建产物位于 `dist/` 目录，完全静态化，可直接部署于任何静态 CDN（Cloudflare Pages, Vercel, GitHub Pages 等）。
+同时启动前端与可选 Express 服务端：
+
+```bash
+pnpm run dev
+```
+
+### 3. 构建生产版本
+
+```bash
+pnpm run build
+pnpm run preview
+```
 
 ---
 
-## 📄 开源许可证 (License)
+## 许可证
 
-本项目采用 [MIT License](LICENSE) 开源。
+本项目基于 [MIT License](LICENSE) 开源。
